@@ -1,0 +1,54 @@
+{
+    "accounts": [
+        {
+            "id": 1234,
+            "username": "usersatu"
+        },
+        {
+            "id": 2345,
+            "username": "userdua"
+        }
+    ],
+    "employees": [
+        {
+            "id": 1676085151490,
+            "userId": 1234,
+            "employeeName": "Nugraha Banuajie",
+            "gender": "Laki-laki",
+            "position": "Front-End Developer",
+            "status": "Karyawan Vendor"
+        },
+        {
+            "id": 1676085180465,
+            "userId": 1234,
+            "employeeName": "Firman Naufal Najib",
+            "gender": "Laki-laki",
+            "position": "Software Engineer",
+            "status": "Karyawan Tetap"
+        },
+        {
+            "id": 1676085260016,
+            "userId": 2345,
+            "employeeName": "Reza Pramudya",
+            "gender": "Laki-laki",
+            "position": "Back-End Developer",
+            "status": "Karyawan Intern"
+        },
+        {
+            "id": 1676085283784,
+            "userId": 2345,
+            "employeeName": "Albar Syaban",
+            "gender": "Laki-laki",
+            "position": "QA Automation",
+            "status": "Karyawan Tetap"
+        },
+        {
+            "id": 1676085302720,
+            "userId": 2345,
+            "employeeName": "Dwi Fitrianingsih",
+            "gender": "Perempuan",
+            "position": "UI/UX",
+            "status": "Karyawan Tetap"
+        }
+    ]
+}
