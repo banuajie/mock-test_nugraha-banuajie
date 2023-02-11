@@ -13,3 +13,5 @@
 ### c. Server menerima request dan memproses secara internal.
 
 ### d. Server mengembalikan response data ke frontend dalam bentuk format JSON.
+
+## NOTE : Gunakan User ID "1234" atau "2345" ketika ingin login
