@@ -14,6 +14,34 @@ Kegunaan dari JSON yaitu sebagai format standar data ketika kita melakukan REST 
 
 4. Server mengembalikan response data ke frontend dalam bentuk format JSON.
 
-## Link Website : https://mock-test-nugraha-banuajie.netlify.app/
+## Link Website :
 
-## NOTE : Gunakan User ID "1234" atau "2345" ketika ingin login
+https://mock-test-nugraha-banuajie.netlify.app/
+
+## NOTE :
+
+Gunakan User ID "1234" atau "2345" ketika ingin login
+
+## Framework :
+
+1. Botstrap
+2. React JS
+
+## State Management :
+
+1. Redux
+
+## Library :
+
+1. axios
+2. react-router
+3. react-router-dom
+4. history
+5. redux
+6. redux-thunk
+7. react-redux
+
+## API :
+
+1. Json Server (http://localhost:5000/accounts)
+2. Json Server (http://localhost:5000/employees)
