@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee } from "../../actions/actionsEmployee";
+import { addEmployee, getEmployeesByUser, updateEmployee } from "../../actions/actionsEmployee";
 import { getAllDataUser } from "../../actions/actionsUser";
 
 const AddEmployee = () => {
     const dispatch = useDispatch();
     const { getAllDataUserResult } = useSelector((state) => state.UserReducer);
-    const { addEmployeeResult } = useSelector((state) => state.EmployeeReducer);
+    const { addEmployeeResult, detailEmployeeResult, updateEmployeeResult } = useSelector((state) => state.EmployeeReducer);
 
     const [id, setId] = useState("");
     const [employeeName, setEmployeeName] = useState("");
@@ -27,6 +27,7 @@ const AddEmployee = () => {
         return Date.now();
     };
 
+    // function ini berfungsi untuk mereset form
     const resetForm = () => {
         setId("");
         setEmployeeName("");
@@ -38,14 +39,43 @@ const AddEmployee = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // tambah data karyawan
-        dispatch(addEmployee({ id: generatedId(), userId: getUserLogin.id, employeeName: employeeName, gender: gender, position: position, status: status }));
+        if (id) {
+            // update data karyawan
+            dispatch(updateEmployee({ id: id, userId: getUserLogin.id, employeeName: employeeName, gender: gender, position: position, status: status }));
+        } else {
+            // tambah data karyawan
+            dispatch(addEmployee({ id: generatedId(), userId: getUserLogin.id, employeeName: employeeName, gender: gender, position: position, status: status }));
+        }
     };
 
     useEffect(() => {
         // reset form add karyawan setelah sukses add data karyawan
         resetForm();
     }, [addEmployeeResult]);
+
+    useEffect(() => {
+        // tampilkan detail setelah klik button Edit
+        setId(detailEmployeeResult.id);
+        setEmployeeName(detailEmployeeResult.employeeName);
+        setGender(detailEmployeeResult.gender);
+        setPosition(detailEmployeeResult.position);
+        setStatus(detailEmployeeResult.status);
+    }, [detailEmployeeResult]);
+
+    const handleCancelEdit = (event) => {
+        event.preventDefault();
+
+        // reset form ketika klik button batal edit
+        resetForm();
+
+        // refresh tabel karyawan ketika klik button batal edit
+        dispatch(getEmployeesByUser({ userId: getUserLogin.id }));
+    };
+
+    useEffect(() => {
+        // reset form ketika sukses update data karyawan
+        resetForm();
+    }, [updateEmployeeResult]);
 
     return (
         <>
@@ -54,7 +84,7 @@ const AddEmployee = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <p className="fs-4 my-auto">Tambah Karyawan</p>
+                            <p className="fs-4 my-auto">{id ? "Edit Karyawan" : "Tambah Karyawan"}</p>
                         </div>
                     </div>
                 </div>
@@ -151,9 +181,17 @@ const AddEmployee = () => {
                                     </select>
                                 </div>
 
-                                <button type="submit" className="btn btn-success btn-sm">
-                                    Tambah Karyawan
+                                {/* button Update/Tambah Karyawan */}
+                                <button type="submit" className="btn btn-success btn-sm" disabled={employeeName === "" || gender === "" || position === "" || status === ""}>
+                                    {id ? "Update Karyawan" : "Tambah Karyawan"}
                                 </button>
+
+                                {/* button batal edit */}
+                                {id && (
+                                    <button className="btn btn-warning btn-sm ms-3" onClick={(event) => handleCancelEdit(event)}>
+                                        Batal Edit
+                                    </button>
+                                )}
                             </form>
                         </div>
 

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmployeesByUser } from "../../actions/actionsEmployee";
+import { deleteEmployee, detailEmployee, getEmployeesByUser } from "../../actions/actionsEmployee";
 
 const ListEmployee = () => {
     const dispatch = useDispatch();
-    const { addEmployeeResult, getEmployeesByUserLoading, getEmployeesByUserResult, getEmployeesByUserError } = useSelector((state) => state.EmployeeReducer);
+    const { addEmployeeResult, getEmployeesByUserLoading, getEmployeesByUserResult, getEmployeesByUserError, deleteEmployeeResult, updateEmployeeResult } = useSelector((state) => state.EmployeeReducer);
 
     // get data user login dari local storage
     const getUserLogin = JSON.parse(window.localStorage.getItem("UserLogin"));
@@ -15,10 +15,21 @@ const ListEmployee = () => {
     }, []);
 
     useEffect(() => {
+        // refresh tabel karyawan ketika sukses add data karyawan
         if (addEmployeeResult) {
             dispatch(getEmployeesByUser({ userId: getUserLogin.id }));
         }
     }, [addEmployeeResult, dispatch, getUserLogin.id]);
+
+    useEffect(() => {
+        // refresh tabel karyawan ketika sukses delete data karyawan
+        dispatch(getEmployeesByUser({ userId: getUserLogin.id }));
+    }, [deleteEmployeeResult, dispatch, getUserLogin.id]);
+
+    useEffect(() => {
+        // refresh tabel karyawan ketika sukses update data
+        dispatch(getEmployeesByUser({ userId: getUserLogin.id }));
+    }, [updateEmployeeResult, dispatch, getUserLogin.id]);
 
     return (
         <>
@@ -62,10 +73,14 @@ const ListEmployee = () => {
                                                     <td>
                                                         <div className="row flex-nowrap">
                                                             <div className="col">
-                                                                <button className="btn btn-info btn-sm w-100">Edit</button>
+                                                                <button className="btn btn-info btn-sm w-100" onClick={() => dispatch(detailEmployee(employee))}>
+                                                                    Edit
+                                                                </button>
                                                             </div>
                                                             <div className="col">
-                                                                <button className="btn btn-danger btn-sm w-100">Hapus</button>
+                                                                <button className="btn btn-danger btn-sm w-100" onClick={() => dispatch(deleteEmployee(employee.id))}>
+                                                                    Hapus
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </td>

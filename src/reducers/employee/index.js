@@ -1,4 +1,4 @@
-import { ADD_EMPLOYEE, GET_EMPLOYEES_BY_USER } from "../../actions/actionsEmployee";
+import { ADD_EMPLOYEE, DELETE_EMPLOYEE, DETAIL_EMPLOYEE, GET_EMPLOYEES_BY_USER, UPDATE_EMPLOYEE } from "../../actions/actionsEmployee";
 
 const initialState = {
     getEmployeesByUserLoading: false,
@@ -8,6 +8,16 @@ const initialState = {
     addEmployeeLoading: false,
     addEmployeeResult: false,
     addEmployeeError: false,
+
+    deleteEmployeeLoading: false,
+    deleteEmployeeResult: false,
+    deleteEmployeeError: false,
+
+    detailEmployeeResult: false,
+
+    updateEmployeeLoading: false,
+    updateEmployeeResult: false,
+    updateEmployeeError: false,
 };
 
 const EmployeeReducer = (state = initialState, action) => {
@@ -26,6 +36,28 @@ const EmployeeReducer = (state = initialState, action) => {
                 addEmployeeLoading: action.payload.loading,
                 addEmployeeResult: action.payload.data,
                 addEmployeeError: action.payload.errorMessage,
+            };
+
+        case DELETE_EMPLOYEE:
+            return {
+                ...state,
+                deleteEmployeeLoading: action.payload.loading,
+                deleteEmployeeResult: action.payload.data,
+                deleteEmployeeError: action.payload.errorMessage,
+            };
+
+        case DETAIL_EMPLOYEE:
+            return {
+                ...state,
+                detailEmployeeResult: action.payload.data,
+            };
+
+        case UPDATE_EMPLOYEE:
+            return {
+                ...state,
+                updateEmployeeLoading: action.payload.loading,
+                updateEmployeeResult: action.payload.data,
+                updateEmployeeError: action.payload.errorMessage,
             };
 
         default:
