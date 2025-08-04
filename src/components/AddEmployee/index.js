@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee, getEmployeesByUser, updateEmployee } from "../../actions/actionsEmployee";
+import { addEmployee, detailEmployee, getEmployeesByUser, updateEmployee } from "../../actions/actionsEmployee";
 import { getAllDataUser } from "../../actions/actionsUser";
 
 const AddEmployee = () => {
